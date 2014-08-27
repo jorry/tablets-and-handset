@@ -1,9 +1,8 @@
 package com.example.android.apis.app;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,7 @@ public class DetailsFragment extends Fragment {
             // the view hierarchy; it would just never be used.
             return null;
         }
-        
+        System.out.println("Detail");
         View v = inflater.inflate(R.layout.details, null);
         int select = getShownIndex()+1;
         Button b = (Button)v.findViewById(R.id.button1);
@@ -57,7 +56,7 @@ public class DetailsFragment extends Fragment {
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
-						getActivity().startActivity(new Intent(getActivity(),TwoActivirty.class));
+						getFragmentManager().beginTransaction().replace(R.id.details,new OtherFragment(), "other").addToBackStack(null).commit();
 					}
 				});
         return v;

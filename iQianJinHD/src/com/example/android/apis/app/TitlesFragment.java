@@ -1,20 +1,30 @@
 package com.example.android.apis.app;
 
-import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-@SuppressLint("NewApi")
 public class TitlesFragment extends ListFragment {
     boolean mDualPane;
     int mCurCheckPosition = 0;
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	if(newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+    		System.out.println("«–ªª∫·∆¡");
+    	}else{
+    		System.out.println("«–ªª ˙∆¡");
+    	}
+    	super.onConfigurationChanged(newConfig);
+    }
     
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -95,8 +105,7 @@ public class TitlesFragment extends ListFragment {
             getListView().setItemChecked(index, true);
 
             // Check what fragment is currently shown, replace if needed.
-            DetailsFragment details = (DetailsFragment)
-                    getFragmentManager().findFragmentById(R.id.details);
+            DetailsFragment details = null;
             if (details == null || details.getShownIndex() != index) {
                 // Make new fragment to show this selection.
                 details = DetailsFragment.newInstance(index);
@@ -104,7 +113,7 @@ public class TitlesFragment extends ListFragment {
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.details, details);
+                    ft.add(R.id.details, details);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }

@@ -1,11 +1,14 @@
 package com.example.android.apis.app;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,9 @@ public class MainActivity extends Activity {
 		
 		
 	}
+	
+	
+	
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
